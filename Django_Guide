@@ -1,0 +1,16 @@
+Django Web-Development:
+
+install python-setuptools
+install easy_install virtualenv==1.10.1
+	{
+		Setup virtual Environment cmd:virtualenv --no-site-packages 'django'(this is the foldername)
+	}
+To activate Virtual Enviroment type cmd:source django/bin/activate
+To deactive type:deactivate
+
+Then go inside the newly Created Folder and install Django:easy_install Django
+
+To create project cmd:django-admin.py startproject "ProjectName"
+
+To Run web-server cmd:python manage.py runserver (localhost)
+
