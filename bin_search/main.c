@@ -11,7 +11,7 @@ int binsearch(int i,int arr[10])
             mid = (max + min)/2;
             if(arr[mid]==i)
                 {
-                    printf("%d\n",sizeof(arr));
+                    printf("%d\n",mid);
                     break;
                 }
             else if (arr[mid]>i){
