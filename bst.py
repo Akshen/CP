@@ -32,6 +32,46 @@ class binary_search_tree:
         else:
             print("Value already present in the tree")
 
+    def find_max(self, curr_node=None):
+        if curr_node.right_child:
+            return self._findmax(curr_node.right_child)
+        else:
+            return curr_node.value
+        
+
+    def _findmax(self, curr_node):
+        if curr_node.right_child is None:
+            return curr_node.value
+
+        return self._findmax(curr_node.right_child)
+        
+
+    def delete(self, element):
+        if self.root != None:
+            self._deleter(element, self.root)
+
+
+    def _deleter(self, element, curr_node):
+        if element > curr_node.value:
+            if curr_node.right_child:
+                curr_node.right_child = self._deleter(element, curr_node.right_child)
+        elif element < curr_node.value:
+            if curr_node.left_child:
+                curr_node.left_child = self._deleter(element, curr_node.left_child)
+        else:
+            if curr_node.left_child is None and curr_node.right_child is None:
+                return None
+            if curr_node.left_child is None:
+                return curr_node.right_child
+            if curr_node.right_child is None:
+                return curr_node.left_child
+            
+            max_val = self.find_max(curr_node.left_child)
+            curr_node.value = max_val
+            curr_node.left_child = self._deleter(max_val, curr_node.left_child)
+
+
+
 
     def print_tree(self):
         if self.root!=None:
@@ -89,7 +129,7 @@ class binary_search_tree:
         elif item>curr_node.value and curr_node.right_child!=None: 
             return self._finder(item, curr_node.right_child)
 
-def fill_tree(tree, num_elements=11, max_int=100):
+def fill_tree(tree, num_elements=4, max_int=100):
     from random import randint
     for _ in range(num_elements):
         curr_elem = randint(0, max_int)
@@ -97,9 +137,10 @@ def fill_tree(tree, num_elements=11, max_int=100):
     return tree
 
 tree = binary_search_tree()
-tree = fill_tree(tree)
-tree.print_tree()
+#tree = fill_tree(tree)
+tree.insert(5)
+tree.insert(4)
+tree.insert(6)
 tree.insert(2000)
-print("Tree height is:-",tree.height())
-tree.search(2000)
-tree.search(101)
+tree.delete(6)
+tree.print_tree()
